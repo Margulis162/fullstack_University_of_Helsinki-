@@ -17,6 +17,13 @@ const Button = (p) =>{
   )
 }
 
+const Display =(p) =>{
+  return(
+    <div className='showFeetback'>
+      <p>here will be some strings and stuff</p>
+    </div>
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -39,11 +46,15 @@ const App = () => {
   return (
     <div className="container">
       <Header message = 'Please leave us some feedback'/>
+      <div className='content'>
       <div className='motherOfButtons'>
         <Button clickHandler = {handleClickPositive} text ="positive"/>
         <Button clickHandler = {handleClick} text ="neutral"/>
         <Button clickHandler = {handleClick} text ="negative"/>
       </div>
+      <Display/>
+      </div>
+    
     </div>
   )
 }
