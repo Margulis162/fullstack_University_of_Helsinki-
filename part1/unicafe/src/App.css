@@ -1,0 +1,41 @@
+
+
+.container{
+  block-size: 100vh;
+  inline-size: 960px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(246, 248, 218, 0.595);
+  margin-inline: auto;
+
+}
+
+
+.header{
+  box-sizing: border-box;
+  block-size:80px;
+  inline-size: 100%;
+  background-image:linear-gradient(to bottom, rgb(21, 16, 24), rgba(34, 33, 14, 0.5));
+  justify-content: center;
+  align-items: center;
+  color:aliceblue;
+}
+
+h1{
+  text-align: center;
+}
+ 
+body{
+  background-color: gray;
+  background-image: linear-gradient(to bottom, gray, rgb(72, 64, 86));
+  display:flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin:0;
+  /* some basic typo */
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  letter-spacing: .1rem;
+  word-spacing: .5rem;
+  color:rgb(109, 66, 40)
+}
