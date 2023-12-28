@@ -20,7 +20,9 @@ const Button = (p) =>{
 const Display =(p) =>{
   return(
     <div className='showFeetback'>
-      <p>here will be some strings and stuff</p>
+      <p>There are <em>{p.good} positive reviews</em></p>
+      <p>There are <em>{p.neutral} neutral reviews</em></p>
+      <p>There are <em>{p.bad} positive reviews</em></p>
     </div>
   )
 }
@@ -35,13 +37,9 @@ const App = () => {
     console.log('click click')
   }
 
-  const handleClickPositive = () =>{
-
-    // suggested workaround doesn't work as expected, did I do it right?
-    const updatedGood = good + 1
-    setGood(updatedGood) 
-    console.log(good) //will log 0 on the first click
-  }
+  const handleClickPositive = () => {return setGood(good+1)} 
+  const handleClickNeutral = () => {return setNeutral(neutral+1)} 
+  const handleClickNegative = () => {return setBad(bad+1)} 
 
   return (
     <div className="container">
@@ -49,10 +47,10 @@ const App = () => {
       <div className='content'>
       <div className='motherOfButtons'>
         <Button clickHandler = {handleClickPositive} text ="positive"/>
-        <Button clickHandler = {handleClick} text ="neutral"/>
-        <Button clickHandler = {handleClick} text ="negative"/>
+        <Button clickHandler = {handleClickNeutral} text ="neutral"/>
+        <Button clickHandler = {handleClickNegative} text ="negative"/>
       </div>
-      <Display/>
+      <Display good ={good} neutral ={neutral} bad ={bad}/>
       </div>
     
     </div>
