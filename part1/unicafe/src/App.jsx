@@ -20,9 +20,11 @@ const Button = (p) =>{
 const Display =(p) =>{
   return(
     <div className='showFeetback'>
-      <p>There are <em>{p.good} positive reviews</em></p>
-      <p>There are <em>{p.neutral} neutral reviews</em></p>
-      <p>There are <em>{p.bad} positive reviews</em></p>
+      <p>There are <em>{p.good}</em> positive reviews</p>
+      <p>There are <em>{p.neutral}</em> neutral reviews</p>
+      <p>There are <em>{p.bad}</em> positive reviews</p>
+      <p>The total number of reviews is <em>{p.total}</em></p>
+      <p>Average review score is <em>{Math.round(p.average, 2)}</em>%</p>
     </div>
   )
 }
@@ -32,14 +34,30 @@ const App = () => {
   const [good, setGood] = useState(0) //changing initial useState to 1 does the job but I feel like it's illigal 
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [average,setAverage] = useState(0)
+  const [total, setTotal] = useState(0)
 
-  const handleClick = () =>{
-    console.log('click click')
+  const handleClickPositive = () => {
+     setGood(good+1)
+     const apdtGood = good+1
+    setAverage((apdtGood - bad)/(apdtGood+bad+neutral)*100)
+    setTotal(apdtGood + neutral+bad)
   }
 
-  const handleClickPositive = () => {return setGood(good+1)} 
-  const handleClickNeutral = () => {return setNeutral(neutral+1)} 
-  const handleClickNegative = () => {return setBad(bad+1)} 
+  const handleClickNeutral = () => {
+    setNeutral(neutral+1)
+    const apdtNeutral = neutral+1
+   setAverage((good - bad)/(good+bad+apdtNeutral)*100)
+   setTotal(good + apdtNeutral+bad)
+  } 
+
+  const handleClickNegative = () => {
+    setBad(bad+1)
+    const apdtBad = bad+1
+   setAverage((good - apdtBad)/(good+apdtBad+neutral)*100)
+   setTotal(good + neutral+apdtBad)
+  } 
+ 
 
   return (
     <div className="container">
@@ -50,7 +68,8 @@ const App = () => {
         <Button clickHandler = {handleClickNeutral} text ="neutral"/>
         <Button clickHandler = {handleClickNegative} text ="negative"/>
       </div>
-      <Display good ={good} neutral ={neutral} bad ={bad}/>
+      <Display className ='display' good ={good} neutral ={neutral} bad ={bad} average ={average}
+      total ={total}/>
       </div>
     
     </div>
