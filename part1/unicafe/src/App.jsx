@@ -39,23 +39,23 @@ const App = () => {
 
   const handleClickPositive = () => {
      setGood(good+1)
-     const apdtGood = good+1
-    setAverage((apdtGood - bad)/(apdtGood+bad+neutral)*100)
-    setTotal(apdtGood + neutral+bad)
+     const updtGood = good+1
+    setAverage((updtGood - bad)/(updtGood+bad+neutral)*100)
+    setTotal(updtGood + neutral+bad)
   }
 
   const handleClickNeutral = () => {
     setNeutral(neutral+1)
-    const apdtNeutral = neutral+1
-   setAverage((good - bad)/(good+bad+apdtNeutral)*100)
-   setTotal(good + apdtNeutral+bad)
+    const updtNeutral = neutral+1
+   setAverage((good - bad)/(good+bad+updtNeutral)*100)
+   setTotal(good + updtNeutral+bad)
   } 
 
   const handleClickNegative = () => {
     setBad(bad+1)
-    const apdtBad = bad+1
-   setAverage((good - apdtBad)/(good+apdtBad+neutral)*100)
-   setTotal(good + neutral+apdtBad)
+    const updtBad = bad+1
+   setAverage((good - updtBad)/(good+updtBad+neutral)*100)
+   setTotal(good + neutral+updtBad)
   } 
  
 
