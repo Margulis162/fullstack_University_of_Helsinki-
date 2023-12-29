@@ -24,7 +24,8 @@ const Display =(p) =>{
       <p>There are <em>{p.neutral}</em> neutral reviews</p>
       <p>There are <em>{p.bad}</em> positive reviews</p>
       <p>The total number of reviews is <em>{p.total}</em></p>
-      <p>Average review score is <em>{Math.round(p.average, 2)}</em>%</p>
+      <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
+      <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
     </div>
   )
 }
@@ -36,12 +37,16 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const [average,setAverage] = useState(0)
   const [total, setTotal] = useState(0)
+  const [positive, setPositive] = useState(0) //this is for the percentage of the positive feedback
+
 
   const handleClickPositive = () => {
      setGood(good+1)
      const updtGood = good+1
     setAverage((updtGood - bad)/(updtGood+bad+neutral)*100)
     setTotal(updtGood + neutral+bad)
+    const updtTotal =total+1
+    setPositive((updtGood/updtTotal)*100)
   }
 
   const handleClickNeutral = () => {
@@ -49,6 +54,8 @@ const App = () => {
     const updtNeutral = neutral+1
    setAverage((good - bad)/(good+bad+updtNeutral)*100)
    setTotal(good + updtNeutral+bad)
+   const updtTotal =total+1
+    setPositive((good/updtTotal)*100)
   } 
 
   const handleClickNegative = () => {
@@ -56,6 +63,8 @@ const App = () => {
     const updtBad = bad+1
    setAverage((good - updtBad)/(good+updtBad+neutral)*100)
    setTotal(good + neutral+updtBad)
+   const updtTotal =total+1
+    setPositive((good/updtTotal)*100)
   } 
  
 
@@ -69,7 +78,7 @@ const App = () => {
         <Button clickHandler = {handleClickNegative} text ="negative"/>
       </div>
       <Display className ='display' good ={good} neutral ={neutral} bad ={bad} average ={average}
-      total ={total}/>
+      total ={total} positive = {positive}/>
       </div>
     
     </div>

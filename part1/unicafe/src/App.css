@@ -63,13 +63,13 @@ button:hover{
 h1{
   white-space: nowrap; 
   overflow: hidden; 
-  animation: typewriter 3s steps(100) 1s 1 normal both;
+  /* animation: typewriter 3s steps(100) 1s 1 normal both; */
   text-align: center;
 }
-@keyframes typewriter{
+/* @keyframes typewriter{
   from{width: 0;}
   to{width: 100%;}
-  }
+  } */
  
  
 body{
@@ -92,5 +92,5 @@ em{
 }
 
 .display{
-  min-inline-size: 400px;
+  min-inline-size: 450px;
 }
