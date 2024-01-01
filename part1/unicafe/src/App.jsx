@@ -18,22 +18,38 @@ const Button = (p) =>{
 }
 
 const Display =(p) =>{
-  return(
-    <div className='showFeetback'>
+  if(p.good == 0 && p.neutral == 0 && p.bad == 0){
+    return(<p></p>)
+  }else{
+    return(
+      <div className='showFeetback'>
       <p>There are <em>{p.good}</em> positive reviews</p>
       <p>There are <em>{p.neutral}</em> neutral reviews</p>
       <p>There are <em>{p.bad}</em> positive reviews</p>
     </div>
-  )
+    )
+   
+  }
+
+
 }
 
 const Statistics = (p) => {
-  return(
-  <div className='showFeetback'>
-  <p>The total number of reviews is <em>{p.total}</em></p>
-  <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
-  <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
-  </div>)
+  
+    if(p.total == 0){
+      return(<p>There is currently no feedback</p>)
+    }else{
+      return(
+        <div className='showFeetback'>
+        <p>The total number of reviews is <em>{p.total}</em></p>
+        <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
+        <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
+        </div>
+      )
+     
+    }
+ 
+ 
 }
 
 
