@@ -19,15 +19,15 @@ const Button = (p) =>{
 
 const Display =(p) =>{
   if(p.good == 0 && p.neutral == 0 && p.bad == 0){
-    return(<p></p>)
+    return('')
   }else{
     return(
-      <div className='showFeetback'>
+      <>
          <StatisticLine text="number of positive reviews is:" value={p.good}/>
          <StatisticLine text="number of neutral reviews is:" value={p.neutral}/>
          <StatisticLine text="number of negative reviews is:" value={p.bad}/>
  
-    </div>
+    </>
     )
    
   }
@@ -37,25 +37,31 @@ const Display =(p) =>{
 
 const StatisticLine = (p) =>{
   return(
-    <p>
-      {p.text}<em> {p.value}</em>
-    </p>
+    <tr >
+      <td className='left'>
+      {p.text}
+    </td>
+    <td className='right'>
+      <em> {p.value}</em>
+      </td>
+    </tr>
+  
   )
 }
 
 const Statistics = (p) => {
   
     if(p.total == 0){
-      return(<p>There is currently no feedback</p>)
+      return(<tr><td>There is currently no feedback</td></tr>)
     }else{
       return(
-        <div className='showFeetback'>
+        <>
           <StatisticLine text="total number of reviews is:" value={p.total}/>
           <StatisticLine text="Average review score is:" value={p.average.toFixed(2) +"%"} />
           <StatisticLine text="Number of positive revievs is: " value={p.positive.toFixed(2) +"%"}/>
     
        
-        </div>
+        </>
       )
      
     }
@@ -113,10 +119,13 @@ const App = () => {
         <Button clickHandler = {handleClickNeutral} text ="neutral"/>
         <Button clickHandler = {handleClickNegative} text ="negative"/>
       </div>
-      <div className ='display'>
+      <table>
+      <tbody>
       <Display  good ={good} neutral ={neutral} bad ={bad} />
       <Statistics  average ={average} total ={total} positive = {positive}/>
-      </div>
+      </tbody>
+      </table>
+    
       </div>
     
     </div>

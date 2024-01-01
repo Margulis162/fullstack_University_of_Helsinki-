@@ -55,7 +55,7 @@ button:hover{
   justify-content: center;
   align-items: center;
   color:yellow;
-  /* text-shadow:  0px -12px 45px cyan, 0px 12px 45px magenta;  */
+  margin-block-end:30px;
   
 
 
@@ -94,8 +94,12 @@ em{
   color:yellow;
 }
 
-.showFeetback{
-  min-inline-size: 400px;
-  /* background-color: white; */
-  text-align: left;
+
+
+.left{
+  text-align:left;
 }
+.right{
+  text-align: right;
+}
+
