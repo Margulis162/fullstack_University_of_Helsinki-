@@ -23,15 +23,24 @@ const Display =(p) =>{
   }else{
     return(
       <div className='showFeetback'>
-      <p>There are <em>{p.good}</em> positive reviews</p>
-      <p>There are <em>{p.neutral}</em> neutral reviews</p>
-      <p>There are <em>{p.bad}</em> positive reviews</p>
+         <StatisticLine text="number of positive reviews is:" value={p.good}/>
+         <StatisticLine text="number of neutral reviews is:" value={p.neutral}/>
+         <StatisticLine text="number of negative reviews is:" value={p.bad}/>
+ 
     </div>
     )
    
   }
 
 
+}
+
+const StatisticLine = (p) =>{
+  return(
+    <p>
+      {p.text}<em> {p.value}</em>
+    </p>
+  )
 }
 
 const Statistics = (p) => {
@@ -41,9 +50,11 @@ const Statistics = (p) => {
     }else{
       return(
         <div className='showFeetback'>
-        <p>The total number of reviews is <em>{p.total}</em></p>
-        <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
-        <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
+          <StatisticLine text="total number of reviews is:" value={p.total}/>
+          <StatisticLine text="Average review score is:" value={p.average.toFixed(2) +"%"} />
+          <StatisticLine text="Number of positive revievs is: " value={p.positive.toFixed(2) +"%"}/>
+    
+       
         </div>
       )
      
