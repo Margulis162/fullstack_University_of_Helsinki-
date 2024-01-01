@@ -27,8 +27,11 @@
 
 button{
   background-color: black;
+  border-block-start: 5px solid rgb(91, 1, 91);
+  border-block-end:  5px solid rgb(0, 63, 63);
+  border-inline: none;
   border-radius: 5px;
-  border:1px solid cyan;
+  /* border:1px solid cyan; */
   block-size: 30px;
   inline-size: 100px;
   color:rgba(255, 255, 255, .7);
@@ -39,8 +42,8 @@ button{
 button:hover{
   background-color: cyan;
   color:black;
-  border:4px solid black;
-  box-shadow: -1px -1px 25px cyan;
+  /* border:4px solid black; */
+  box-shadow: -1px -1px 25px rgb(253, 253, 130);
 }
 
 
@@ -91,6 +94,8 @@ em{
   color:yellow;
 }
 
-.display{
-  min-inline-size: 450px;
+.showFeetback{
+  min-inline-size: 400px;
+  /* background-color: white; */
+  text-align: left;
 }
