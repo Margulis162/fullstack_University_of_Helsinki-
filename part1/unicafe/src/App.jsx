@@ -23,12 +23,19 @@ const Display =(p) =>{
       <p>There are <em>{p.good}</em> positive reviews</p>
       <p>There are <em>{p.neutral}</em> neutral reviews</p>
       <p>There are <em>{p.bad}</em> positive reviews</p>
-      <p>The total number of reviews is <em>{p.total}</em></p>
-      <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
-      <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
     </div>
   )
 }
+
+const Statistics = (p) => {
+  return(
+  <div className='showFeetback'>
+  <p>The total number of reviews is <em>{p.total}</em></p>
+  <p>Average review score is <em>{p.average.toFixed(2)}</em>%</p>
+  <p>Number of positive revievs is <em>{p.positive.toFixed(2)}%</em></p>
+  </div>)
+}
+
 
 const App = () => {
   // save clicks of each button to its own state
@@ -71,14 +78,18 @@ const App = () => {
   return (
     <div className="container">
       <Header message = 'Please leave us some feedback'/>
+      
       <div className='content'>
+
       <div className='motherOfButtons'>
         <Button clickHandler = {handleClickPositive} text ="positive"/>
         <Button clickHandler = {handleClickNeutral} text ="neutral"/>
         <Button clickHandler = {handleClickNegative} text ="negative"/>
       </div>
-      <Display className ='display' good ={good} neutral ={neutral} bad ={bad} average ={average}
-      total ={total} positive = {positive}/>
+      <div className ='display'>
+      <Display  good ={good} neutral ={neutral} bad ={bad} />
+      <Statistics  average ={average} total ={total} positive = {positive}/>
+      </div>
       </div>
     
     </div>
