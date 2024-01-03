@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
@@ -46,7 +48,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  block-size: 150px;
+  block-size: 100vh;
 }
 
 button{
@@ -56,5 +58,18 @@ button{
 
 #anecdote{
 
-  min-block-size:80px;
+  min-block-size:300px;
+}
+
+h2{
+  color:bisque
+}
+
+#buttons{
+  display: flex;
+  flex-direction: column;
+}
+
+em{
+  color:yellow;
 }

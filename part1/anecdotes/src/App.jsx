@@ -11,6 +11,12 @@ const Button =(p) => {
   )
 }
 
+const Header =(p) =>{
+  return(
+    <h2>{p.text}</h2>
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -25,7 +31,7 @@ const App = () => {
   ]
 
   const [points, setPoints] = useState({0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0})
-  
+  const [mostVoted, setMostVoted] = useState(0)
   const [selected, setSelected] = useState(0)
 
   const randomString =() =>{
@@ -38,18 +44,35 @@ const App = () => {
     const updated ={
       ...points,
     [selected]:  points[selected] +=1}
+
+    const scors = Object.values(points)
+    let largest = Math.max(...scors)
+    setMostVoted(Object.keys(points).find(key => points[key] === largest)) //remember this one 
+    console.log(scors, largest)
+    
+
+
+
     setPoints(updated)
-      console.log(points)
+
+    
+      
   }
 
   return (
     <div className='container'>
       <div id="anecdote" >
+      <Header text='Anecdote of the day'/>
+      <p>{anecdotes[mostVoted]}</p>
+      <Header text='Current Joke'/>
       <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
+      <p>has <em>{points[selected]}</em> votes</p>
         </div>
-      <Button randomString={randomString} text='random joke' />
-      <Button randomString={vote} text='vote' />
+        <div id ="buttons">
+        <Button randomString={randomString} text='random joke' />
+        <Button randomString={vote} text='vote'/>
+        </div>
+     
     </div>
 
  
