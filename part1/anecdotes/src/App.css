@@ -53,3 +53,8 @@ button{
   inline-size: 150px;
   margin-top: 40px;
 }
+
+#anecdote{
+
+  min-block-size:80px;
+}
