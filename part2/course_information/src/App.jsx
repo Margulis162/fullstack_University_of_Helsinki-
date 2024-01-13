@@ -5,7 +5,7 @@ const Course = ({course})=>{
 
      <Content course ={course} />
 
-    {/* <Total course ={p} />  */}
+    <Total course ={course} /> 
   </>
   )
 }
@@ -43,13 +43,13 @@ const Content = (p)=>{
   )
 }
 
-// const Total = (p) =>{
-//   return(
-//     <div>
-//     <p>The total number of exercises is {p.course.parts[0].exercises + p.course.parts[1].exercises + p.course.parts[2].exercises}</p>
-//   </div>
-//   )
-// }
+const Total = (p) =>{
+  return(
+    <div>
+    <p>The total number of exercises is {p.course.parts[0].exercises + p.course.parts[1].exercises + p.course.parts[2].exercises}</p>
+  </div>
+  ) 
+}
 
 const App = () => {
   const course = {
