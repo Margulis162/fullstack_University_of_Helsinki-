@@ -42,11 +42,16 @@ const Content  = ({ courses }) => {
       {courses.map((course) => (
         <div key={course.id}>
           <h1 >{course.name}</h1>
+          <h1>test</h1>
           {course.parts.map((part) => (
+            
             <p key={part.id}>
               {part.name}
             </p>
           ))}
+       <p>There are {courses.reduce((total, course) => total + course.parts.reduce((subTotal, part) => subTotal + part.exercises, 0), 0)} </p>
+
+
         </div>
       ))}
     </div>
