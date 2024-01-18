@@ -49,7 +49,7 @@ const Content  = ({ courses }) => {
               {part.name}
             </p>
           ))}
-       <p>There are {courses.reduce((total, course) => total + course.parts.reduce((subTotal, part) => subTotal + part.exercises, 0), 0)} </p>
+           <h4>There are {course.parts.reduce((total, part) => total + part.exercises, 0)} exersises in the course</h4>
 
 
         </div>
