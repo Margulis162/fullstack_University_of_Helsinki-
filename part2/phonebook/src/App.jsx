@@ -16,7 +16,7 @@ const App = () => {
     ) 
   }
   
-
+  const phoneBook = persons.map(person => <Lst key={person.name} name ={person.name}/>)
   
 
   const [newName, setNewName] = useState('') //ment to control input
@@ -26,12 +26,23 @@ const App = () => {
     const contactObj ={
       name: newName
     }
-    const updatedPersons = persons
-    updatedPersons.push(contactObj)
-    setPersons(updatedPersons)
-    setNewName('')
-    
+
+    console.log(phoneBook)
+
+    if(newName === ''){alert('the name is empty or duplicates an existing on e!')}
+    else if(phoneBook.find(person => person.key === contactObj.name)){
+      alert(`the name ${contactObj.name} is already in the list`)
+    }
+    else{
+      const updatedPersons = persons
+      updatedPersons.push(contactObj)
+      setPersons(updatedPersons)
+      setNewName('')
+    }
+   
+      
   }
+
 
   const inpChangeHandler =(event) =>{
     console.log(event.target.value)
@@ -60,8 +71,8 @@ const App = () => {
 
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person => 
-          <Lst key={person.name} name ={person.name}/>)}
+        {phoneBook}
+       
       </ul>
     </div>
   )
