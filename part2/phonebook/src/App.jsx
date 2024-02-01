@@ -27,9 +27,9 @@ const App = () => {
       name: newName
     }
 
-    console.log(phoneBook)
+    
 
-    if(newName === ''){alert('the name is empty or duplicates an existing on e!')}
+    if(newName === ''){alert('a name is needed')}
     else if(phoneBook.find(person => person.key === contactObj.name)){
       alert(`the name ${contactObj.name} is already in the list`)
     }
@@ -38,6 +38,7 @@ const App = () => {
       updatedPersons.push(contactObj)
       setPersons(updatedPersons)
       setNewName('')
+      event.target[0].value = '' // resets input value to '' on submission
     }
    
       
@@ -45,7 +46,6 @@ const App = () => {
 
 
   const inpChangeHandler =(event) =>{
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
@@ -61,8 +61,7 @@ const App = () => {
         <div>
           name: 
           <input
-          //  value ="enter person's name here"
-           onChange ={inpChangeHandler} />
+           onChange ={inpChangeHandler}/>
         </div>
         <div>
           <button type="submit">add</button>
