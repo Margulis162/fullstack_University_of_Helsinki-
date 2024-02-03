@@ -28,7 +28,8 @@ const App = () => {
       return persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>)
     }else{
       return persons.filter((person)=>{
-       if(person.name.includes(newFilter)){
+       
+       if(person.name.toLowerCase().includes(newFilter.toLowerCase())){
         console.log(person)
        } 
       })
