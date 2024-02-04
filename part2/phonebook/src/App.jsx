@@ -21,19 +21,7 @@ const App = () => {
     ) 
   }
   
-  // const phoneBook = persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>)
-  
-  const phoneBook =()=>{
-    if(newFilter === ''){
-      return persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>)
-    }else{
-      const filtredLst = persons.filter((person)=> person.name.toLowerCase().includes(newFilter.toLowerCase())
-      )
-      return filtredLst.map(person=> <Lst key={person.name} name ={person.name} phone={person.phone}/>)
-      
-    }
-  }
-
+  const [phoneBook, setPhoneBook]  = useState(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
   const [newName, setNewName] = useState('') //ment to control input
   const [newNum, setNewNum] = useState('')
   const [newFilter, setNewFilter] = useState('')
@@ -46,11 +34,11 @@ const App = () => {
     }
 
     
-
+   
     if(newName === ''){alert('a name is needed')}else
     if(newNum === ''){alert('please enter a phone')}else
-    if(newNum.length !== 10){alert('phone phone needs to be 10 digits long')}
-    else if(phoneBook.find(person => person.key === contactObj.name)){
+    if(newNum.length !== 10){alert('phone phone needs to be 10 digits long')}else 
+    if(phoneBook.find(person => person.key === contactObj.name)){
       alert(`the name ${contactObj.name} is already in the list`)
     }
     else{
@@ -59,6 +47,7 @@ const App = () => {
       setPersons(updatedPersons)
       setNewName('')
       setNewNum('')
+      setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
       event.target[0].value = '' // resets input value to '' on submission
       event.target[1].value = '' 
     }
@@ -76,7 +65,21 @@ const App = () => {
   }
 
   const filterHandler = (event) =>{
-    setNewFilter(event.target.value)
+    
+    const change = event.target.value
+    setNewFilter(change)
+
+
+    console.log(change, newFilter)
+    if(change === ''){
+      return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
+    }else{
+      
+      const filtredLst = persons
+        .filter((person)=> person.name.toLowerCase().includes(change.toLowerCase()))
+        .map(person=> <Lst key={person.name} name ={person.name} phone={person.phone}/>)
+        setPhoneBook(filtredLst)
+        }
   }
 
 
@@ -89,7 +92,7 @@ const App = () => {
 
       <div>
         filter:
-        <input onChange ={filterHandler}/>
+        <input onChange ={filterHandler} />
       </div>
       
       <h3>add contact</h3>
@@ -114,8 +117,7 @@ const App = () => {
 
       <h2>phones</h2>
       <ul>
-        {phoneBook()}
-       
+        {phoneBook}
       </ul>
     </div>
   )
