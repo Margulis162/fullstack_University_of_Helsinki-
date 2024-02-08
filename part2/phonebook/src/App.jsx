@@ -1,6 +1,48 @@
 import { useState } from 'react'
 
+const Filter = ({prop}) =>{
+  return(
+    <div>
+    filter:
+    <input onChange ={prop}/>
+  </div>
+  )
+}
 
+const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
+  return(
+    <div>
+     <form onSubmit={addContact}>
+        {/* name */}
+        <div>
+          name:   
+          <input
+           onChange ={nameChangeHandler}/>
+        </div>
+        {/* phone */}
+        <div>
+          phone: 
+          <input
+           onChange ={numChangeHandler}/>
+        </div>
+        {/* submisson button */}
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+  </div>
+  )
+  
+}
+
+var Book = ({phoneBook}) => {
+  
+  return(
+    <ul>
+      {phoneBook}
+    </ul>
+  )
+}
 
 const App = () => {
   
@@ -65,11 +107,8 @@ const App = () => {
   }
 
   const filterHandler = (event) =>{
-    
     const change = event.target.value
     setNewFilter(change)
-
-
     console.log(change, newFilter)
     if(change === ''){
       return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
@@ -90,35 +129,16 @@ const App = () => {
 
       <h2>Phonebook</h2>
 
-      <div>
-        filter:
-        <input onChange ={filterHandler} />
-      </div>
+      <Filter prop ={filterHandler}/>
       
-      <h3>add contact</h3>
-      <form onSubmit={addContact}>
-        {/* name */}
-        <div>
-          name:   
-          <input
-           onChange ={nameChangeHandler}/>
-        </div>
-        {/* phone */}
-        <div>
-          phone: 
-          <input
-           onChange ={numChangeHandler}/>
-        </div>
-        {/* submisson button */}
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h3>add contact</h3> 
 
+      <Form addContact ={addContact} nameChangeHandler ={nameChangeHandler} numChangeHandler ={numChangeHandler}/>
+     
       <h2>phones</h2>
-      <ul>
-        {phoneBook}
-      </ul>
+
+      <Book phoneBook ={phoneBook}/>
+
     </div>
   )
 }
