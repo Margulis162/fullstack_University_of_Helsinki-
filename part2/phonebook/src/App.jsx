@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from "axios"
 
 const Filter = ({prop}) =>{
   return(
@@ -35,7 +36,7 @@ const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
   
 }
 
-var Book = ({phoneBook}) => {
+const Book = ({phoneBook}) => {
   
   return(
     <ul>
@@ -44,29 +45,38 @@ var Book = ({phoneBook}) => {
   )
 }
 
+const Lst = (p)=>{
+  return(
+    <li>
+      {p.name}:{' '+p.phone}
+    </li>
+
+  ) 
+}
+
 const App = () => {
   
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone: '0420123456'},
-    { name: 'Ada Lovelace', phone: '3944533523' },
-    { name: 'Dan Abramov', phone: '1243234345' },
-    { name: 'Mary Poppendieck', phone: '3923642312' }
-  ])
-
-
-  const Lst = (p)=>{
-    return(
-      <li>
-        {p.name}:{' '+p.phone}
-      </li>
   
-    ) 
-  }
+  const [persons, setPersons] = useState([])
+  const [phoneBook, setPhoneBook]  = useState([])
+
+  useEffect(()=>{
+    axios
+    .get('http://localhost:3001/persons')
+    .then((resp) =>{
+      console.log(resp)
+      setPersons(resp.data)
+      setPhoneBook(resp.data.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
+    })
+  },[])
   
-  const [phoneBook, setPhoneBook]  = useState(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
+
+  
   const [newName, setNewName] = useState('') //ment to control input
   const [newNum, setNewNum] = useState('')
   const [newFilter, setNewFilter] = useState('')
+
+
   
   const addContact =(event) =>{
     event.preventDefault()
@@ -74,6 +84,10 @@ const App = () => {
       name: newName,
       phone: newNum,
     }
+ 
+
+ 
+
 
     
    
