@@ -48,7 +48,7 @@ const Book = ({phoneBook}) => {
 const Lst = (p)=>{
   return(
     <li>
-      {p.name}:{' '+p.phone}
+      {p.name}:{' '+p.number}
     </li>
 
   ) 
@@ -64,9 +64,9 @@ const App = () => {
     axios
     .get('http://localhost:3001/persons')
     .then((resp) =>{
-      console.log(resp)
+      console.log(resp.data)
       setPersons(resp.data)
-      setPhoneBook(resp.data.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
+      setPhoneBook(resp.data.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
     })
   },[])
   
@@ -82,7 +82,7 @@ const App = () => {
     event.preventDefault()
     const contactObj ={
       name: newName,
-      phone: newNum,
+      number: newNum,
     }
  
 
@@ -93,17 +93,17 @@ const App = () => {
    
     if(newName === ''){alert('a name is needed')}else
     if(newNum === ''){alert('please enter a phone')}else
-    if(newNum.length !== 10){alert('phone phone needs to be 10 digits long')}else 
+    if(newNum.length !== 10){alert('phone needs to be 10 digits long')}else 
     if(phoneBook.find(person => person.key === contactObj.name)){
       alert(`the name ${contactObj.name} is already in the list`)
     }
     else{
-      const updatedPersons = persons
-      updatedPersons.push(contactObj)
-      setPersons(updatedPersons)
+      const update = [...persons, contactObj]
+      setPersons(update) 
+      setPhoneBook(update.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+      
       setNewName('')
       setNewNum('')
-      setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
       event.target[0].value = '' // resets input value to '' on submission
       event.target[1].value = '' 
     }
@@ -111,7 +111,7 @@ const App = () => {
       
   }
 
-
+ 
   const nameChangeHandler =(event) =>{
     setNewName(event.target.value)
   }
@@ -125,12 +125,12 @@ const App = () => {
     setNewFilter(change)
     console.log(change, newFilter)
     if(change === ''){
-      return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} phone={person.phone}/>))
+      return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
     }else{
       
       const filtredLst = persons
         .filter((person)=> person.name.toLowerCase().includes(change.toLowerCase()))
-        .map(person=> <Lst key={person.name} name ={person.name} phone={person.phone}/>)
+        .map(person=> <Lst key={person.name} name ={person.name} number={person.number}/>)
         setPhoneBook(filtredLst)
         }
   }
