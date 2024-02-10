@@ -56,7 +56,6 @@ const Lst = (p)=>{
 
 const App = () => {
   
-  
   const [persons, setPersons] = useState([])
   const [phoneBook, setPhoneBook]  = useState([])
 
@@ -64,20 +63,14 @@ const App = () => {
     axios
     .get('http://localhost:3001/persons')
     .then((resp) =>{
-      console.log(resp.data)
       setPersons(resp.data)
       setPhoneBook(resp.data.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
     })
   },[])
-  
 
-  
   const [newName, setNewName] = useState('') //ment to control input
   const [newNum, setNewNum] = useState('')
-  const [newFilter, setNewFilter] = useState('')
 
-
-  
   const addContact =(event) =>{
     event.preventDefault()
     const contactObj ={
@@ -85,12 +78,6 @@ const App = () => {
       number: newNum,
     }
  
-
- 
-
-
-    
-   
     if(newName === ''){alert('a name is needed')}else
     if(newNum === ''){alert('please enter a phone')}else
     if(newNum.length !== 10){alert('phone needs to be 10 digits long')}else 
@@ -122,8 +109,6 @@ const App = () => {
 
   const filterHandler = (event) =>{
     const change = event.target.value
-    setNewFilter(change)
-    console.log(change, newFilter)
     if(change === ''){
       return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
     }else{
@@ -134,9 +119,6 @@ const App = () => {
         setPhoneBook(filtredLst)
         }
   }
-
-
-
 
   return (
     <div>
