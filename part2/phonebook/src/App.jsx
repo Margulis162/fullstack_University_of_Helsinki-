@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
+import requester from '../service/requester'
 
 const Filter = ({prop}) =>{
   return(
@@ -60,12 +61,12 @@ const App = () => {
   const [phoneBook, setPhoneBook]  = useState([])
 
   useEffect(()=>{
-    axios
-    .get('http://localhost:3001/persons')
-    .then((resp) =>{
-      setPersons(resp.data)
-      setPhoneBook(resp.data.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
-    })
+    requester
+      .getAll()
+      .then((resp) =>{
+          setPersons(resp)
+          setPhoneBook(resp.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))})
+      .catch(err => console.log(`error at useEffect ${err.message}`))    
   },[])
 
   const [newName, setNewName] = useState('') //ment to control input
@@ -76,6 +77,7 @@ const App = () => {
     const contactObj ={
       name: newName,
       number: newNum,
+      id: `${persons.length + 1}`
     }
  
     if(newName === ''){alert('a name is needed')}else
@@ -85,14 +87,20 @@ const App = () => {
       alert(`the name ${contactObj.name} is already in the list`)
     }
     else{
-      const update = [...persons, contactObj]
-      setPersons(update) 
-      setPhoneBook(update.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
-      
-      setNewName('')
-      setNewNum('')
-      event.target[0].value = '' // resets input value to '' on submission
-      event.target[1].value = '' 
+      requester
+        .addContact(contactObj)
+        .then( resp =>{
+          const bookUpdate = [...persons,resp]
+          setPersons(bookUpdate)
+          console.log(bookUpdate,persons)
+          setPhoneBook(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number}/>))
+          setNewName('')
+          setNewNum('')
+          event.target[0].value = '' // resets input value to '' on submission
+          event.target[1].value = '' 
+        }
+        )
+    
     }
    
       
