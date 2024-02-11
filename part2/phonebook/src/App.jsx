@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from "axios"
 import requester from '../service/requester'
 
 const Filter = ({prop}) =>{
@@ -50,6 +49,7 @@ const Lst = (p)=>{
   return(
     <li>
       {p.name}:{' '+p.number}
+      <button onClick ={p.handleDel} id ={p.id}>Delete</button>
     </li>
 
   ) 
@@ -65,7 +65,7 @@ const App = () => {
       .getAll()
       .then((resp) =>{
           setPersons(resp)
-          setPhoneBook(resp.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))})
+          setPhoneBook(resp.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/>))})
       .catch(err => console.log(`error at useEffect ${err.message}`))    
   },[])
 
@@ -93,7 +93,7 @@ const App = () => {
           const bookUpdate = [...persons,resp]
           setPersons(bookUpdate)
           console.log(bookUpdate,persons)
-          setPhoneBook(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number}/>))
+          setPhoneBook(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/> ))
           setNewName('')
           setNewNum('')
           event.target[0].value = '' // resets input value to '' on submission
@@ -126,6 +126,13 @@ const App = () => {
         .map(person=> <Lst key={person.name} name ={person.name} number={person.number}/>)
         setPhoneBook(filtredLst)
         }
+  }
+
+  const handleDel =(event) =>{
+    event.preventDefault()
+    requester
+      .remove(event.target.id)
+      .then(resp => console.log(resp))
   }
 
   return (
