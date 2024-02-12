@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
+// service functions
 import requester from '../service/requester'
+//component's modules
+import PhoneList from '/PhoneList'
 
 const Filter = ({prop}) =>{
   return(
@@ -36,14 +39,7 @@ const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
   
 }
 
-const Book = ({phoneBook}) => {
-  
-  return(
-    <ul>
-      {phoneBook}
-    </ul>
-  )
-}
+
 
 const Lst = (p)=>{
   return(
@@ -58,14 +54,14 @@ const Lst = (p)=>{
 const App = () => {
   
   const [persons, setPersons] = useState([])
-  const [phoneBook, setPhoneBook]  = useState([])
+  const [phoneList, setPhoneList]  = useState([])
 
   useEffect(()=>{
     requester
       .getAll()
       .then((resp) =>{
           setPersons(resp)
-          setPhoneBook(resp.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/>))})
+          setPhoneList(resp.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/>))})
       .catch(err => console.log(`error at useEffect ${err.message}`))    
   },[])
 
@@ -83,7 +79,7 @@ const App = () => {
     if(newName === ''){alert('a name is needed')}else
     if(newNum === ''){alert('please enter a phone')}else
     if(newNum.length !== 10){alert('phone needs to be 10 digits long')}else 
-    if(phoneBook.find(person => person.key === contactObj.name)){
+    if(phoneList.find(person => person.key === contactObj.name)){
       alert(`the name ${contactObj.name} is already in the list`)
     }
     else{
@@ -93,7 +89,7 @@ const App = () => {
           const bookUpdate = [...persons,resp]
           setPersons(bookUpdate)
           console.log(bookUpdate,persons)
-          setPhoneBook(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/> ))
+          setPhoneList(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/> ))
           setNewName('')
           setNewNum('')
           event.target[0].value = '' // resets input value to '' on submission
@@ -118,13 +114,13 @@ const App = () => {
   const filterHandler = (event) =>{
     const change = event.target.value
     if(change === ''){
-      return setPhoneBook(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+      return setPhoneList(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
     }else{
       
       const filtredLst = persons
         .filter((person)=> person.name.toLowerCase().includes(change.toLowerCase()))
         .map(person=> <Lst key={person.name} name ={person.name} number={person.number}/>)
-        setPhoneBook(filtredLst)
+        setPhoneList(filtredLst)
         }
   }
 
@@ -148,7 +144,7 @@ const App = () => {
      
       <h2>phones</h2>
 
-      <Book phoneBook ={phoneBook}/>
+      <PhoneList phoneList ={phoneList}/>
 
     </div>
   )
