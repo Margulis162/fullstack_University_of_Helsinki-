@@ -2,59 +2,17 @@ import { useState, useEffect } from 'react'
 // service functions
 import requester from '../service/requester'
 //component's modules
-import PhoneList from '/PhoneList'
-
-const Filter = ({prop}) =>{
-  return(
-    <div>
-    filter:
-    <input onChange ={prop}/>
-  </div>
-  )
-}
-
-const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
-  return(
-    <div>
-     <form onSubmit={addContact}>
-        {/* name */}
-        <div>
-          name:   
-          <input
-           onChange ={nameChangeHandler}/>
-        </div>
-        {/* phone */}
-        <div>
-          phone: 
-          <input
-           onChange ={numChangeHandler}/>
-        </div>
-        {/* submisson button */}
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-  </div>
-  )
-  
-}
-
-
-
-const Lst = (p)=>{
-  return(
-    <li>
-      {p.name}:{' '+p.number}
-      <button onClick ={p.handleDel} id ={p.id}>Delete</button>
-    </li>
-
-  ) 
-}
+import PhoneList from './components/phoneList'
+import Form from './components/form'
+import Filter from './components/filter'
+import Lst from './components/list'
 
 const App = () => {
-  
+  //use states var
   const [persons, setPersons] = useState([])
   const [phoneList, setPhoneList]  = useState([])
+  const [newName, setNewName] = useState('') //ment to control input
+  const [newNum, setNewNum] = useState('')
 
   useEffect(()=>{
     requester
@@ -65,8 +23,6 @@ const App = () => {
       .catch(err => console.log(`error at useEffect ${err.message}`))    
   },[])
 
-  const [newName, setNewName] = useState('') //ment to control input
-  const [newNum, setNewNum] = useState('')
 
   const addContact =(event) =>{
     event.preventDefault()
