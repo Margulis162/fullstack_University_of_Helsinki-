@@ -1,43 +1,13 @@
 {
   "persons": [
     {
-      "id": "1",
-      "name": "Mark Margulis",
-      "number": "7204720757"
-    },
-    {
-      "id": "2",
-      "name": "Jason  AteHam",
-      "number": "1231231234"
-    },
-    {
-      "id": "3",
-      "name": "Robby Harry the III",
-      "number": "1231231234"
-    },
-    {
-      "id": "4",
-      "name": "Ada Lovelase",
-      "number": "1231231234"
-    },
-    {
       "id": "5",
       "name": "LIsich ",
       "number": "1231231234"
     },
     {
-      "id": "6",
-      "name": "Ahoj Matrs",
-      "number": "1231231234"
-    },
-    {
-      "id": "7",
-      "name": "Tst testovich",
-      "number": "1231231234"
-    },
-    {
-      "id": "8",
-      "name": "another test",
+      "id": "2",
+      "name": "Mark Margulis",
       "number": "1231231234"
     }
   ]

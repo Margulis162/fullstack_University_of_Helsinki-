@@ -70,7 +70,7 @@ const App = () => {
   const filterHandler = (event) =>{
     const change = event.target.value
     if(change === ''){
-      return setPhoneList(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+      return setPhoneList(persons.map(person => <Lst key={person.id} name ={person.name} number={person.number}/>))
     }else{
       
       const filtredLst = persons
@@ -84,7 +84,14 @@ const App = () => {
     event.preventDefault()
     requester
       .remove(event.target.id)
-      .then(resp => console.log(resp))
+      .then(()=>
+        requester.getAll()
+          .then((resp) => {
+            setPersons(resp)
+            setPhoneList(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+             }
+            )
+      )
   }
 
   return (
@@ -92,8 +99,7 @@ const App = () => {
 
       <h2>Phonebook</h2>
 
-      <Filter prop ={filterHandler}/>
-      
+      <Filter filterHandler ={filterHandler}/>
       <h3>add contact</h3> 
 
       <Form addContact ={addContact} nameChangeHandler ={nameChangeHandler} numChangeHandler ={numChangeHandler}/>
