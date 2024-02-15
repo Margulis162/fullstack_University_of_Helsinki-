@@ -9,10 +9,10 @@ import Lst from './components/list'
 
 const App = () => {
   //use states var
-  const [persons, setPersons] = useState([])
-  const [phoneList, setPhoneList]  = useState([])
-  const [newName, setNewName] = useState('') //ment to control input
-  const [newNum, setNewNum] = useState('')
+  const [persons, setPersons] = useState([]) //updates data for rendering
+  const [phoneList, setPhoneList]  = useState([]) //renders data
+  const [newName, setNewName] = useState('') //collects input
+  const [newNum, setNewNum] = useState('')  //collects input
 
   useEffect(()=>{
     requester
@@ -113,3 +113,6 @@ const App = () => {
 }
 
 export default App
+
+// TODO:
+// figure out unique id for deletion
