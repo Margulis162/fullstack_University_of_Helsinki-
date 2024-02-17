@@ -91,15 +91,17 @@ const App = () => {
     event.preventDefault()
     requester
       .remover(event.target.id)
-      .then(()=> {
+      .then(()=>{
         requester.getAll()
-            .then((resp)=>{
-              const update = resp
-              setPhoneList(dataMapper(update))
-            })
-      })
-  }
-
+        .then((resp)=>{
+          const update = resp
+          setPhoneList(dataMapper(update))
+        })
+      }
+        
+        )
+    }
+  
   return (
     <div>
 

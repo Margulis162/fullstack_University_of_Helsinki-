@@ -16,9 +16,13 @@ const addContact =(obj) =>{
 }
 
 const remover =(id) =>{
-    const req = axios.delete(url+"/"+id)
-    return req
+    const ask = confirm(`Are you sure you want to delete the contact?`)
+     if(ask === true){
+        const req = axios.delete(url+"/"+id)
+        return req
         .catch(err => console.log(`error at remover ${err.message}`))
+     }else{ 
+        return Promise.reject('contact stays in the book')}
 }
 
 export default {getAll, addContact, remover}

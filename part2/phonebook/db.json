@@ -6,38 +6,13 @@
       "number": "1231231234"
     },
     {
-      "id": "name",
-      "name": "Name",
-      "number": "1231231234"
-    },
-    {
-      "id": "newname",
-      "name": "New Name",
-      "number": "1231231234"
-    },
-    {
-      "id": "newnewname",
-      "name": "New New Name",
-      "number": "1231231234"
-    },
-    {
-      "id": "test",
-      "name": "test",
-      "number": "1231231234"
-    },
-    {
-      "id": "test3",
-      "name": "test 3",
-      "number": "1231231234"
-    },
-    {
       "id": "markmargulis",
       "name": "Mark Margulis",
       "number": "1231231234"
     },
     {
-      "id": "victoryismine",
-      "name": "Victory is mine",
+      "id": "test",
+      "name": "test ",
       "number": "1231231234"
     }
   ]
