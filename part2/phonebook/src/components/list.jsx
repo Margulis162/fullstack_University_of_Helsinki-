@@ -1,8 +1,8 @@
-const Lst = (p)=>{
+const Lst = ({name, number, handleDel, id})=>{
     return(
       <li>
-        {p.name}:{' '+p.number}
-        <button onClick ={p.handleDel} id ={p.id}>Delete</button>
+        {name}:{' '+number}
+        <button onClick ={handleDel} id ={id}>Delete</button>
       </li>
     ) 
   }

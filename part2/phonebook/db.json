@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "id": "michele_mayor",
-      "name": "Michele Mayor ",
-      "number": "1231231234"
-    },
-    {
       "id": "ada_lowelace",
       "name": "Ada Lowelace",
       "number": "1231231234"
@@ -21,13 +16,28 @@
       "number": "1231231234"
     },
     {
-      "id": "namename",
-      "name": "Name Name ",
+      "id": "newnewname",
+      "name": "New New Name",
       "number": "1231231234"
     },
     {
-      "id": "nameanother",
-      "name": "Name Another",
+      "id": "test",
+      "name": "test",
+      "number": "1231231234"
+    },
+    {
+      "id": "test3",
+      "name": "test 3",
+      "number": "1231231234"
+    },
+    {
+      "id": "markmargulis",
+      "name": "Mark Margulis",
+      "number": "1231231234"
+    },
+    {
+      "id": "victoryismine",
+      "name": "Victory is mine",
       "number": "1231231234"
     }
   ]

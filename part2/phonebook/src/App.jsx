@@ -9,17 +9,20 @@ import Lst from './components/list'
 
 const App = () => {
   //use states var
-  const [persons, setPersons] = useState([]) //updates data for rendering
   const [phoneList, setPhoneList]  = useState([]) //renders data
   const [newName, setNewName] = useState('') //collects input
   const [newNum, setNewNum] = useState('')  //collects input
+
+  //wraps data into li tags for display
+  const dataMapper = (data) => {
+    return data.map((person) => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/>)
+  }
 
   useEffect(()=>{
     requester
       .getAll()
       .then((resp) =>{
-          setPersons(resp)
-          setPhoneList(resp.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/>))})
+          setPhoneList(dataMapper(resp))})
       .catch(err => console.log(`error at useEffect ${err.message}`))    
   },[])
 
@@ -44,20 +47,15 @@ const App = () => {
       requester
         .addContact(contactObj)
         .then( resp =>{
-          const bookUpdate = [...persons,resp]
-          setPersons(bookUpdate)
-          console.log(bookUpdate,persons)
-          setPhoneList(bookUpdate.map(person => <Lst key={person.id} name ={person.name} number={person.number} handleDel={handleDel} id ={person.id}/> ))
+          const update = phoneList.concat(dataMapper([resp])) //square brackets around resp are there so map exists(-:
+          setPhoneList(update)
           setNewName('')
           setNewNum('')
           event.target[0].value = '' // resets input value to '' on submission
           event.target[1].value = '' 
         }
         )
-    
     }
-   
-      
   }
 
  
@@ -72,13 +70,20 @@ const App = () => {
   const filterHandler = (event) =>{
     const change = event.target.value
     if(change === ''){
-      return setPhoneList(persons.map(person => <Lst key={person.id} name ={person.name} number={person.number}/>))
+      requester
+      .getAll()
+      .then((resp) =>{
+          setPhoneList(dataMapper(resp))})
     }else{
-      
-      const filtredLst = persons
-        .filter((person)=> person.name.toLowerCase().includes(change.toLowerCase()))
-        .map(person=> <Lst key={person.name} name ={person.name} number={person.number}/>)
-        setPhoneList(filtredLst)
+      const filtredLst = 
+        requester
+        .getAll()
+        .then(resp=>{
+          const filtered = resp.filter((person)=>person.name.toLowerCase().includes(change.toLowerCase()))
+          setPhoneList(dataMapper(filtered))
+        }
+          )
+          
         }
   }
 
@@ -89,10 +94,8 @@ const App = () => {
       .then(()=> {
         requester.getAll()
             .then((resp)=>{
-              console.log(resp)
-              const update = setPersons(resp)
-              console.log(setPersons)
-              setPhoneList(update.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+              const update = resp
+              setPhoneList(dataMapper(update))
             })
       })
   }
@@ -116,6 +119,3 @@ const App = () => {
 }
 
 export default App
-
-// TODO:
-// figure out unique id for deletion
