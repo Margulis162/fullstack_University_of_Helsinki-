@@ -25,4 +25,17 @@ const remover =(id) =>{
         return Promise.reject('contact stays in the book')}
 }
 
-export default {getAll, addContact, remover}
+const phoneUpdate =(obj) =>{
+    const ask = confirm(`${obj.name} is already in the contacts. Would you like to update the phone number?`)
+    if(ask === true){
+        const updateData ={ number:obj.number}
+        const update = axios.patch(url+"/"+obj.id, updateData)
+        return update
+            .catch(err => console.log(`error at phoneUpdate ${err.message}`))
+    }else{
+        return Promise.reject('changed your ming, huh?')
+    }
+   
+}
+
+export default {getAll, addContact, remover, phoneUpdate}

@@ -40,10 +40,20 @@ const App = () => {
     if(newName === ''){alert('a name is needed')}else
     if(newNum === ''){alert('please enter a phone')}else
     if(newNum.length !== 10){alert('phone needs to be 10 digits long')}else 
-    if(phoneList.find(person => person.key === contactObj.name)){
-      alert(`the name ${contactObj.name} is already in the list`)
+    if(phoneList.find(person => person.key === contactObj.name && person.number === contactObj.number)){
+      alert(`the name ${contactObj.name} is already in the list`)}else 
+    if(phoneList.find(person => person.key === contactObj.name && person.number !== contactObj.number)){
+      requester
+        .phoneUpdate(contactObj)
+        .then(()=>{
+          requester
+        .getAll()
+        .then(resp=>{
+          setPhoneList(dataMapper(resp))
+        })
+        })
     }
-    else{
+      else{
       requester
         .addContact(contactObj)
         .then( resp =>{
@@ -75,15 +85,12 @@ const App = () => {
       .then((resp) =>{
           setPhoneList(dataMapper(resp))})
     }else{
-      const filtredLst = 
         requester
         .getAll()
         .then(resp=>{
           const filtered = resp.filter((person)=>person.name.toLowerCase().includes(change.toLowerCase()))
           setPhoneList(dataMapper(filtered))
-        }
-          )
-          
+        })
         }
   }
 
