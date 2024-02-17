@@ -29,7 +29,9 @@ const App = () => {
     const contactObj ={
       name: newName,
       number: newNum,
-      id: `${persons.length + 1}`
+      //sence all names are unique for our data it make sense to use them as ids, 
+      //this way I do not have to shift numbers every time an entry gets deleted
+      id: newName.replace(" ","").replace(" ","").toLocaleLowerCase() //replaces so json server doesn't freak out on ids and accidential typos
     }
  
     if(newName === ''){alert('a name is needed')}else
@@ -83,15 +85,16 @@ const App = () => {
   const handleDel =(event) =>{
     event.preventDefault()
     requester
-      .remove(event.target.id)
-      .then(()=>
+      .remover(event.target.id)
+      .then(()=> {
         requester.getAll()
-          .then((resp) => {
-            setPersons(resp)
-            setPhoneList(persons.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
-             }
-            )
-      )
+            .then((resp)=>{
+              console.log(resp)
+              const update = setPersons(resp)
+              console.log(setPersons)
+              setPhoneList(update.map(person => <Lst key={person.name} name ={person.name} number={person.number}/>))
+            })
+      })
   }
 
   return (

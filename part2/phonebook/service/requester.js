@@ -15,12 +15,10 @@ const addContact =(obj) =>{
             .catch(err => console.log(`error at addContact requester ${err.message}`))
 }
 
-const remove =(id) =>{
-    // const contactToDel = `${url}/${id}`
+const remover =(id) =>{
     const req = axios.delete(url+"/"+id)
     return req
-        .then(resp =>resp.data)
-        .catch(err => console.log(`error at addContact requester ${err.message}`))
+        .catch(err => console.log(`error at remover ${err.message}`))
 }
 
-export default {getAll, addContact, remove}
+export default {getAll, addContact, remover}
