@@ -1,0 +1,31 @@
+:root{
+    background-color: gray;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: .1rem;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main{
+    inline-size: 460px;
+    block-size: 100%;
+    
+}
+
+input{
+    margin-block:10px;
+}
+
+ul{
+    background-color: antiquewhite;
+    padding:20px;
+    border-radius:5px;
+}
+
+li{
+    margin-block:8px;
+    display:flex;
+    justify-content: space-between;
+}

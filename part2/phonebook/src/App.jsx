@@ -6,12 +6,14 @@ import PhoneList from './components/phoneList'
 import Form from './components/form'
 import Filter from './components/filter'
 import Lst from './components/list'
+import Success from './components/success'
 
 const App = () => {
   //use states var
   const [phoneList, setPhoneList]  = useState([]) //renders data
   const [newName, setNewName] = useState('') //collects input
   const [newNum, setNewNum] = useState('')  //collects input
+  const [successMsg, setSuccessMsg] = useState(null)
 
   //wraps data into li tags for display
   const dataMapper = (data) => {
@@ -49,7 +51,12 @@ const App = () => {
           requester
         .getAll()
         .then(resp=>{
-          setPhoneList(dataMapper(resp))
+          setPhoneList(dataMapper(resp))})
+        .then(()=>{
+          setSuccessMsg('the phone number was successfuly updated!')
+          setTimeout(() => {
+            setSuccessMsg(null)
+          }, 4000)
         })
         })
     }
@@ -62,7 +69,11 @@ const App = () => {
           setNewName('')
           setNewNum('')
           event.target[0].value = '' // resets input value to '' on submission
-          event.target[1].value = '' 
+          event.target[1].value = '' })
+        .then(()=>{
+          setSuccessMsg("Contact was added successfuly")
+          setTimeout(()=>
+          {setSuccessMsg(null)}, 4000)
         }
         )
     }
@@ -110,17 +121,17 @@ const App = () => {
     }
   
   return (
-    <div>
+    <div className="main">
 
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
 
       <Filter filterHandler ={filterHandler}/>
-      <h3>add contact</h3> 
+      <h3>Add contact</h3> 
 
       <Form addContact ={addContact} nameChangeHandler ={nameChangeHandler} numChangeHandler ={numChangeHandler}/>
      
-      <h2>phones</h2>
-
+      <h2>Phones</h2>
+      <Success msg = {successMsg}/>
       <PhoneList phoneList ={phoneList}/>
 
     </div>
