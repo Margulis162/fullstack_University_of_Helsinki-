@@ -9,6 +9,7 @@ const Success =({msg}) =>{
     if(msg === null){
         return null
     }
+    
     return(
         <div style={msgStyle} >
             <h3>!Success!</h3>

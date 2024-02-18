@@ -1,7 +1,7 @@
 const Filter = ({filterHandler}) =>{
     return(
       <div>
-      filter:
+      filter:{' '}
       <input onChange ={filterHandler}/>
     </div>
     )

@@ -4,7 +4,7 @@ const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
        <form onSubmit={addContact}>
           {/* name */}
           <div>
-            name:   
+            name:{' '}    
             <input
              onChange ={nameChangeHandler}/>
           </div>
@@ -21,7 +21,6 @@ const Form =({addContact, nameChangeHandler, numChangeHandler}) =>{
         </form>
     </div>
     )
-    
   }
 
   export default Form
