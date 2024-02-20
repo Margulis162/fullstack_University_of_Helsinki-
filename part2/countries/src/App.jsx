@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import requester from '../service/requester'
 
 const Form = ({text, handleChange}) =>{
   return(
@@ -14,19 +13,29 @@ const Form = ({text, handleChange}) =>{
   )
 }
 
+
+
+
 function App() {
+  console.log(requester.getAll)
+
+  useEffect(()=>{
+    const data =  requester
+  .getAll()
+  .then((resp)=>console.log(resp.data))
+  .catch(err => console.log(err.message))
+  },[])
   
   const [country, setCountry] = useState("")
 
   const changeHandler =(event) =>{
-    // event.preventDefault()
     setCountry(event.target.value)
-    
+  
+
   }
-  console.log(country)
   return (
     <>
-       <Form text={'Enter country name here:'} handleChange={changeHandler}/>
+       <Form text={'Enter country name here: '} handleChange={changeHandler}/>
     </>
   )
 }
