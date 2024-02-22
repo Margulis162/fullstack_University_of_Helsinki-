@@ -1,4 +1,7 @@
-const Form = ({text, handleChange}) =>{
+const Form = ({text, handleChange, data}) =>{
+    if(data === null){
+        return null
+    }
     return(
       <div>
       <form>
