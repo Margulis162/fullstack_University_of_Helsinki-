@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import requester from '../service/requester'
 import './App.css'
 //elements in src folder
-import Form from './form'
-import List from './list'
+import Form from './components/form'
+import List from './components/list'
 
 
 
