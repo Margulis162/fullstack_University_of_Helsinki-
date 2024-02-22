@@ -16,7 +16,6 @@ function App() {
   const changeHandler =(event) =>{
     const itemsToDispl = data.filter((country) => (country.name.common.toLowerCase().includes(event.target.value.toLowerCase())) )
     setItems(itemsToDispl)
-    console.log('items to display are' + itemsToDispl)
   }
   
   useEffect(()=>{
@@ -42,4 +41,3 @@ function App() {
 export default App
 
 // TODO:
-// okay the game plan for the weekend is to reduce the data in get all to the countries which names match data in country hook
