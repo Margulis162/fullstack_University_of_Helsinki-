@@ -8,11 +8,16 @@ const Display =(props) => {
     }
     
     const mainDiv = {
-        textAlign:"left"
+        textAlign:'left'
+    }
+
+    const flagSpan ={
+        marginInlineStart:'10px',
+        fontSize:'3rem'
     }
     //js
-    const  {name, capital, area, languages}  = props.item[0]
-    
+    const  {name, capital, area, languages, flag}  = props.item[0]
+
     const Lst = () =>{
             const values = Object.values(languages)
         return(
@@ -23,10 +28,15 @@ const Display =(props) => {
     }
     return(
         <div style = {mainDiv}>
-            <h2><span style ={spanStyle}>Official name is:</span>{name.common}</h2>
+            <h2>
+                <span style ={spanStyle}>Official name is:</span>
+                    {name.common}
+                <span style={flagSpan}>
+                    {flag}
+                </span>
+            </h2>
             <p><span style={spanStyle}>Capital:</span>{capital[0]}</p>
             <p><span style={spanStyle}>Area:</span>{area}km</p>
-
                 <span style={spanStyle}>languages spoken:</span>
                 <Lst/>
             

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import requester from '../service/requester'
 import './App.css'
 //elements in src folder
-import Form from './components/form'
-import List from './components/list'
+import Form from './components/Form'
+import List from './components/List'
 
 
 
@@ -18,6 +18,12 @@ function App() {
     setItems(itemsToDispl)
   }
   
+  const handleClick = (event) => {
+    const itemsToDispl = data.filter((country) => (country.name.common.toLowerCase().includes(event.target.innerText.toLowerCase())) )
+    console.log(event.target.innerText)
+    setItems(itemsToDispl) 
+  }
+
   useEffect(()=>{
     requester
     .getAll()
@@ -33,7 +39,7 @@ function App() {
   return (
     <>
        <Form text={'Enter country name here: '} handleChange={changeHandler} data ={data}/>
-       <List items = {items}></List>
+       <List items = {items} handleClick ={handleClick}></List>
     </>
   )
 }
