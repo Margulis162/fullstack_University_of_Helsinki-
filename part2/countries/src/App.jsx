@@ -4,8 +4,9 @@ import './App.css'
 //elements in src folder
 import Form from './components/Form'
 import List from './components/List'
-
-
+//key for the weather API
+const key  = import.meta.env.VITE_KEY
+ 
 
 
 function App() {
